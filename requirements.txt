@@ -1,0 +1,16 @@
+transformers
+torch
+bs4
+markdownify
+polyglot
+pyicu
+pycld2
+tqdm
+accelerate
+einops
+flash_attn
+peft
+deepspeed
+bitsandbytes==0.37.2
+SentencePiece
+fschat
