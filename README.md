@@ -13,14 +13,14 @@ If you have a high-end graphics card, just follow the file to train. If you only
 
 ## 2. Fine-tuning method
 
-• Use lora method to train only part of the parameters 
-• The basic model adopts half-precision llama-7b-hf
-• Use load_in_8bit to load the basic model 
-• Use peft technology for fine-tuning
-• Use bitsandbytes to accelerate
-Then we based on FastChat, this article modifies the lora training code, uses the shareGPT corpus, and fine-tunes on a 16G card, occupying about 13G of GPU memory. 
-• Operating system: centos or ubuntu 
-• NVIDA P100 or T4: 16G GPU memory or above 
+• Use lora method to train only part of the parameters <br>
+• The basic model adopts half-precision llama-7b-hf <br>
+• Use load_in_8bit to load the basic model <br>
+• Use peft technology for fine-tuning <br>
+• Use bitsandbytes to accelerate <br>
+Then we based on FastChat, this article modifies the lora training code, uses the shareGPT corpus, and fine-tunes on a 16G card, occupying about 13G of GPU memory. <br>
+• Operating system: centos or ubuntu <br>
+• NVIDA P100 or T4: 16G GPU memory or above <br>
 • CUDA, conda
 
 ## 3.Fine-tuning process
