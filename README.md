@@ -154,8 +154,7 @@ CUDA_VISIBLE_DEVICES=1 python3 -m fastchat.data.split_long_conversation --in ./d
 # 禁用wandb
 wandb disabled
 # 为了防止ssh终端断开导致训练中止，训练可在后台运行（去掉#三处注释即可在后台运行）
-CUDA_VISIBLE_DEVICES=1 \
-#nohup \
+CUDA_VISIBLE_DEVICES=0 \ #nohup \
 deepspeed fastchat/train/train_lora.py \
     --deepspeed ./deepspeed-config.json \
     --lora_r 8 \
@@ -178,7 +177,7 @@ deepspeed fastchat/train/train_lora.py \
     --warmup_ratio 0.03 \
     --lr_scheduler_type "cosine" \
     --logging_steps 1 \
-    --model_max_length 2048 \
+    --model_max_length 1024 \
     --gradient_checkpointing True #>> lora.log  2>&1 &
   # 如果在后台运行，则tail lora.log查看训练进度
   tail -f lora.log
@@ -186,4 +185,6 @@ deepspeed fastchat/train/train_lora.py \
 
 #### 3.4.2 微调性能
 
-在P100（16G）上进行微调，占用内存13.5G，在训练一轮的情况下，需要250个小时，大约10天时间，还是非常耗时时，形成的模型效果也有待验证。
+在P100（16G）上进行微调，占用内存13.5G，在训练一轮的情况下，需要120个小时，大约5天时间，还是非常耗时时，形成的模型效果也有待验证。
+
+model_max_length会影响到训练的时长，如果设成1024，比2048的时长减少一半，但会影响到推理效果。
