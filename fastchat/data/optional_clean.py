@@ -87,4 +87,6 @@ if __name__ == "__main__":
             new_content.append(conv)
 
     print(f"return {len(new_content)} out of {len(content)}, start dump ...")
-    json.dump(new_content, open(out_file, "w"), indent=2)
+    json_content = json.dumps(new_content, ensure_ascii=False,indent=2)
+    with open(out_file, 'w', encoding='utf-8') as f:
+        f.write(json_content)

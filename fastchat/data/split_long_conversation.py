@@ -104,7 +104,9 @@ def main(args):
     new_content = filter_invalid_roles(new_content)
 
     print(f"total: {len(content)}, new: {len(new_content)}")
-    json.dump(new_content, open(args.out_file, "w"), indent=2)
+    json_content = json.dumps(new_content, ensure_ascii=False,indent=2)
+    with open(args.out_file, 'w', encoding='utf-8') as f:
+        f.write(json_content)
 
 
 if __name__ == "__main__":

@@ -124,7 +124,7 @@ python3 fastchat/data/clean_sharegpt.py --in ./data/sg_90k.json --out ./data/sha
 #### 3.3.4 去掉一些用不到的语言（可选）
 
 ```bash
-python3 -m fastchat.data.optional_clean --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_1.json --skip-lang SOME_LANGUAGE_CODE
+python3 fastchat/data/optional_clean.py --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_1.json --skip-lang SOME_LANGUAGE_CODE
 其中SOME_LANGUAGE_CODE的取值举例如下：
 en - 英语
 es - 西班牙语
@@ -143,7 +143,7 @@ nl - 荷兰语
 #### 3.3.5 将长会话切分成短对话
 
 ```shell
-CUDA_VISIBLE_DEVICES=1 python3 -m fastchat.data.split_long_conversation --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_split.json --model-name ./pyllama_data/output/7B
+CUDA_VISIBLE_DEVICES=1 python3 fastchat/data/split_long_conversation.py --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_split.json --model-name ./pyllama_data/output/7B
 ```
 
 ### 3.4、微调

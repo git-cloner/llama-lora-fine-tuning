@@ -117,7 +117,7 @@ python3 fastchat/data/clean_sharegpt.py --in ./data/sg_90k.json --out ./data/sha
 #### 3.3.4 Remove some unused languages (optional)
 
 ```bash
-python3 -m fastchat.data.optional_clean --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_1.json --skip-lang SOME_LANGUAGE_CODE 
+python3 fastchat/data/optional_clean.py --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_1.json --skip-lang SOME_LANGUAGE_CODE 
 The values of SOME_LANGUAGE_CODE are as follows:
 en - English
 es - Spanish 
@@ -136,7 +136,7 @@ nl - Dutch
 #### 3.3.5 Split long conversations into short dialogues
 
 ```bash
-CUDA_VISIBLE_DEVICES=1 python3 -m fastchat.data.split_long_conversation --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_split.json --model-name ./pyllama_data/output/7B
+CUDA_VISIBLE_DEVICES=1 python3 fastchat/data/split_long_conversation.py --in ./data/sharegpt_clean.json --out ./data/sharegpt_clean_split.json --model-name ./pyllama_data/output/7B
 ```
 
 ### 3.4 Fine-tuning
