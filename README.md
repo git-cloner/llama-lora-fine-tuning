@@ -5,9 +5,9 @@
 ## 1. Overview
 
 There are generally two schemes for fine-tuning FaceBook/LLaMA. One is Stanford's alpaca series, and the other is Vicuna based on shareGPT corpus. Vicuna uses multi-round dialogue corpus, and the training effect is better than alpaca which is defaulted to single-round dialogue. Therefore, it is recommended to fine-tune Llama based on Vicuna.
-The two fine-tuning ways are described in detail in the following projects (the description of lora mode in FastChat is relatively simple).
-https://github.com/tloen/alpaca-lora
-https://github.com/lm-sys/FastChat
+The two fine-tuning ways are described in detail in the following projects (the description of lora mode in FastChat is relatively simple). <br>
+https://github.com/tloen/alpaca-lora <br>
+https://github.com/lm-sys/FastChat <br>
 Alpaca-lora has low memory requirements, about 12G 2080Ti can support, but training multi-round session models like Vicuna requires high GPU memory. Vicuna model training requires at least 24G GPU memory [official recommendation is 4 * V100 (32G)].
 If you have a high-end graphics card, just follow the file to train. If you only have a 16G graphics card but want to customize the corpus to reproduce the Vicuna model, you have to think of many ways to continuously reduce the precision from 32 bits to half precision 16 bits, then from 16 bits to 8 bits, and accelerate the training method to achieve the goal.
 
