@@ -111,7 +111,7 @@ python3 -m fastchat.data.merge --in ./data/sg_90k_part1.json ./data/sg_90k_part2
 #### 3.3.3 Html to Markdown
 
 ```bash
-python3 -m fastchat/data/clean_sharegpt.py --in ./data/sg_90k.json --out ./data/sharegpt_clean.json
+python3 fastchat/data/clean_sharegpt.py --in ./data/sg_90k.json --out ./data/sharegpt_clean.json
 ```
 
 #### 3.3.4 Remove some unused languages (optional)
