@@ -11,6 +11,7 @@ import json
 import logging
 import re
 from typing import Dict, Union
+import opencc
 
 import bs4
 import markdownify  # == 0.11.6
@@ -26,7 +27,7 @@ code_lang_format = "```\g<1>\n\g<2>\n```"
 regenerate_pattern = re.compile("\d+ / \d+")
 copy_chars_pattern = re.compile("Copy\d+ chars / \d+ words")
 copy_code_pattern = re.compile("```(.*?)Copy code\s*```")
-
+converter = opencc.OpenCC('t2s')
 
 def reformat_code(val: str) -> str:
     # Input code format is:
@@ -99,7 +100,7 @@ def clean_html_one_sample(sample):
             new_val = html_to_markdown(c["value"])
         except (bs4.builder.ParserRejectedMarkup, AssertionError):
             return (sample, 4)
-
+        new_val = converter.convert(new_val)
         c["value"] = new_val
 
     return (sample, 0)
@@ -181,7 +182,9 @@ def clean_html_all(content, begin, end):
 def main(args):
     content = json.load(open(args["in_file"], "r"))
     content = clean_html_all(content, args["begin"], args["end"])
-    json.dump(content, open(args["out_file"], "w"), indent=2)
+    json_content = json.dumps(content, ensure_ascii=False,indent=2)
+    with open(args["out_file"], 'w', encoding='utf-8') as f:
+        f.write(json_content)
 
 
 if __name__ == "__main__":
