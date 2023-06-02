@@ -154,8 +154,9 @@ CUDA_VISIBLE_DEVICES=1 python3 fastchat/data/split_long_conversation.py --in ./d
 # 禁用wandb
 wandb disabled
 # 为了防止ssh终端断开导致训练中止，训练可在后台运行（去掉#三处注释即可在后台运行）
-CUDA_VISIBLE_DEVICES=0 \ #nohup \
-deepspeed fastchat/train/train_lora.py \
+# 如果有多颗GPU，可以用--num_gpus参数
+CUDA_VISIBLE_DEVICES=0,1 \ #nohup \
+deepspeed --num_gpus=2 fastchat/train/train_lora.py \
     --deepspeed ./deepspeed-config.json \
     --lora_r 8 \
     --lora_alpha 16 \

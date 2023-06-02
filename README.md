@@ -149,8 +149,9 @@ CUDA_VISIBLE_DEVICES=1 python3 fastchat/data/split_long_conversation.py --in ./d
 # Disable wandb 
 wandb disabled 
 # In order to prevent the SSH terminal from disconnecting and stopping the training, the training can run in the background (remove the # in three places to run in the background)
-CUDA_VISIBLE_DEVICES=0 \ #nohup \ 
-deepspeed fastchat/train/train_lora.py \ 
+# If you have multiple GPUs,using --num_gpus parameter
+CUDA_VISIBLE_DEVICES=0,1 \ #nohup \ 
+deepspeed --num_gpus=2 fastchat/train/train_lora.py \ 
   --deepspeed ./deepspeed-config.json \ 
   --lora_r 8 \ 
   --lora_alpha 16 \ 

@@ -14,7 +14,7 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
+import os
 from dataclasses import dataclass, field
 import logging
 import pathlib
@@ -97,12 +97,22 @@ def train():
         lora_args,
     ) = parser.parse_args_into_dataclasses()
     print("开始装载模型")
+    device_map = "auto"
+    world_size = int(os.environ.get("WORLD_SIZE", 1))
+    ddp = world_size != 1
+    if ddp:
+        device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}
+        print(device_map
+        
+        
+        
+        )
     model = LlamaForCausalLM.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=training_args.cache_dir,
         load_in_8bit=True,
         torch_dtype=torch.float16,
-        device_map="auto"
+        device_map=device_map
     )
     print("装载模型完成")
     model = prepare_model_for_int8_training(model)
