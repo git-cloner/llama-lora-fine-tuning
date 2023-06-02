@@ -161,13 +161,13 @@ deepspeed --num_gpus=2 fastchat/train/train_lora.py \
   --fp16 True \ 
   --output_dir ./output \ 
   --num_train_epochs 1 \ 
-  --per_device_train_batch_size 1 \ 
-  --per_device_eval_batch_size 1 \ 
+  --per_device_train_batch_size 4 \ 
+  --per_device_eval_batch_size 4 \ 
   --gradient_accumulation_steps 1 \ 
   --evaluation_strategy "no" \ 
   --save_strategy "steps" \ 
-  --save_steps 1200 \ 
-  --save_total_limit 100 \ 
+  --save_steps 2400 \ 
+  --save_total_limit 5 \ 
   --learning_rate 2e-5 \ 
   --weight_decay 0. \ 
   --warmup_ratio 0.03 \ 
