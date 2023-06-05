@@ -112,7 +112,7 @@ CUDA_VISIBLE_DEVICES=1 python3 ./convert_llama_weights_to_hf.py --input_dir ./py
 #### 3.3.2 合并语料文件
 
 ```bash
-python3 -m fastchat.data.merge --in ./data/sg_90k_part1.json ./data/sg_90k_part2.json --out ./data/sg_90k.json
+python3 fastchat/data/merge.py --in ./data/sg_90k_part1.json ./data/sg_90k_part2.json ./data/dummy_cn.json ./data/dummy_en.json --out ./data/sg_90k.json
 ```
 
 #### 3.3.3 html转markdown
@@ -166,8 +166,8 @@ deepspeed --num_gpus=2 fastchat/train/train_lora.py \
     --fp16 True \
     --output_dir ./output \
     --num_train_epochs 1 \
-    --per_device_train_batch_size 4 \
-    --per_device_eval_batch_size 4 \
+    --per_device_train_batch_size 14 \
+    --per_device_eval_batch_size 14 \
     --gradient_accumulation_steps 1 \
     --evaluation_strategy "no" \
     --save_strategy "steps" \
@@ -178,7 +178,7 @@ deepspeed --num_gpus=2 fastchat/train/train_lora.py \
     --warmup_ratio 0.03 \
     --lr_scheduler_type "cosine" \
     --logging_steps 1 \
-    --model_max_length 1024 \
+    --model_max_length 512 \
     --gradient_checkpointing True #>> lora.log  2>&1 &
   # 如果在后台运行，则tail lora.log查看训练进度
   tail -f lora.log

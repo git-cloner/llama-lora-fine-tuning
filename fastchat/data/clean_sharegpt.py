@@ -180,7 +180,7 @@ def clean_html_all(content, begin, end):
 
 
 def main(args):
-    content = json.load(open(args["in_file"], "r"))
+    content = json.load(open(args["in_file"], "r",encoding='utf-8'))
     content = clean_html_all(content, args["begin"], args["end"])
     json_content = json.dumps(content, ensure_ascii=False,indent=2)
     with open(args["out_file"], 'w', encoding='utf-8') as f:

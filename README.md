@@ -105,7 +105,7 @@ Download sg_90k_part1.json and sg_90k_part2.json into the data directory
 #### 3.3.2 Merge corpus files
 
 ```bash
-python3 -m fastchat.data.merge --in ./data/sg_90k_part1.json ./data/sg_90k_part2.json --out ./data/sg_90k.json
+python3 fastchat/data/merge.py --in ./data/sg_90k_part1.json ./data/sg_90k_part2.json ./data/dummy_cn.json ./data/dummy_en.json --out ./data/sg_90k.json
 ```
 
 #### 3.3.3 Html to Markdown
@@ -161,8 +161,8 @@ deepspeed --num_gpus=2 fastchat/train/train_lora.py \
   --fp16 True \ 
   --output_dir ./output \ 
   --num_train_epochs 1 \ 
-  --per_device_train_batch_size 4 \ 
-  --per_device_eval_batch_size 4 \ 
+  --per_device_train_batch_size 14 \ 
+  --per_device_eval_batch_size 14 \ 
   --gradient_accumulation_steps 1 \ 
   --evaluation_strategy "no" \ 
   --save_strategy "steps" \ 
@@ -173,7 +173,7 @@ deepspeed --num_gpus=2 fastchat/train/train_lora.py \
   --warmup_ratio 0.03 \ 
   --lr_scheduler_type "cosine" \ 
   --logging_steps 1 \ 
-  --model_max_length 1024 \ 
+  --model_max_length 512 \ 
   --gradient_checkpointing True #>> lora.log 2>&1 &
 # If running in the background, tail lora.log to check the training progress 
 tail -f lora.log

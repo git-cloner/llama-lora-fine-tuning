@@ -78,7 +78,7 @@ if __name__ == "__main__":
             out_file += "_reduce_rep"
         out_file += ".json"
 
-    content = json.load(open(in_file, "r"))
+    content = json.load(open(in_file, "r",encoding='utf-8'))
     num_conv = len(content)
 
     new_content = []

@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     new_content = []
     for in_file in args.in_file:
-        content = json.load(open(in_file, "r"))
+        content = json.load(open(in_file, "r",encoding='utf-8'))
         new_content.extend(content)
 
-    json.dump(new_content, open(args.out_file, "w"), indent=2)
+    json.dump(new_content, open(args.out_file, "w",encoding='utf-8'), ensure_ascii=False,indent=2)
