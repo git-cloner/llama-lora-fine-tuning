@@ -72,7 +72,11 @@ make check
 sudo make install
 ```
 
-##### 3.1.3.3 install packages
+##### 3.1.2.3 安装驱动及conda
+
+https://zhuanlan.zhihu.com/p/597063490
+
+##### 3.1.2.4 install packages
 
 ```bash
 conda create -n llama-lora python=3.10
@@ -189,3 +193,35 @@ deepspeed --num_gpus=2 fastchat/train/train_lora.py \
 在P100（16G）上进行微调，占用内存13.5G，在训练一轮的情况下，需要120个小时，大约5天时间，还是非常耗时时，形成的模型效果也有待验证。
 
 model_max_length会影响到训练的时长，如果设成1024，比2048的时长减少一半，但会影响到推理效果。
+
+#### 3.4.3 A100微调命令
+
+单块A100微调的参数如下，大约需要16小时。
+
+```bash
+deepspeed fastchat/train/train_lora.py \
+    --deepspeed ./deepspeed-config.json \
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.05 \
+    --model_name_or_path ./pyllama_data/output/7B \
+    --data_path ./data/sharegpt_clean_split.json \
+    --fp16 True \
+    --output_dir ./output \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 56 \
+    --per_device_eval_batch_size 56 \
+    --gradient_accumulation_steps 1\
+    --evaluation_strategy "no" \
+    --save_strategy "steps" \
+    --save_steps 1200 \
+    --save_total_limit 5 \
+    --learning_rate 2e-5 \
+    --weight_decay 0. \
+    --warmup_ratio 0.03 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --model_max_length 1024 \
+    --gradient_checkpointing True
+```
+

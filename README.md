@@ -65,7 +65,7 @@ make check
 sudo make install
 ```
 
-##### 3.1.3.3 Install packages
+##### 3.1.2.3 Install packages
 
 ```bash
 conda create -n llama-lora python=3.10
@@ -183,3 +183,35 @@ tail -f lora.log
 
 Fine-tuning on P100 (16G) occupies 13.5G of memory. In the case of one round of training, it takes 120 hours, about 5 days, which is still very time-consuming. The effect of the resulting model needs to be verified. 
 model_max_length will affect the training time. If set to 1024, the time will be halved compared to 2048, but it will affect the inference effect. 
+
+#### 3.4.3 Fine-tuning on A100
+
+fine-tuning on single A100 and  take about 16 hours.
+
+```bash
+deepspeed fastchat/train/train_lora.py \
+    --deepspeed ./deepspeed-config.json \
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.05 \
+    --model_name_or_path ./pyllama_data/output/7B \
+    --data_path ./data/sharegpt_clean_split.json \
+    --fp16 True \
+    --output_dir ./output \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 56 \
+    --per_device_eval_batch_size 56 \
+    --gradient_accumulation_steps 1\
+    --evaluation_strategy "no" \
+    --save_strategy "steps" \
+    --save_steps 1200 \
+    --save_total_limit 5 \
+    --learning_rate 2e-5 \
+    --weight_decay 0. \
+    --warmup_ratio 0.03 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --model_max_length 1024 \
+    --gradient_checkpointing True
+```
+
