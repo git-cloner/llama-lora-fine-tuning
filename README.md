@@ -215,3 +215,34 @@ deepspeed fastchat/train/train_lora.py \
     --gradient_checkpointing True
 ```
 
+## 4、Test trained model
+
+### 4.1 model file structure
+
+The trained LoRa peft model consists of adapter_config.json, adapter_model.bin, and trainer_state.json. Below is the target structure of peft and the original llama model.
+
+```bash
+model
+───llama-peft
+│      adapter_config.json
+│      adapter_model.bin
+│      trainer_state.json
+│
+└──llama_7b
+        config.json
+        generation_config.json
+        pytorch_model-00001-of-00002.bin
+        pytorch_model-00002-of-00002.bin
+        pytorch_model.bin.index.json
+        special_tokens_map.json
+        tokenizer.json
+        tokenizer.model
+        tokenizer_config.json
+```
+
+### 4.2 test generate
+
+```bash
+CUDA_VISIBLE_DEVICES=0  python generate.py  --base_model ./model/llama-7b --lora_weights ./model/llama-peft
+```
+
