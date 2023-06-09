@@ -219,7 +219,7 @@ deepspeed fastchat/train/train_lora.py \
 
 ### 4.1 model file structure
 
-The trained LoRa peft model consists of adapter_config.json, adapter_model.bin, and trainer_state.json. Below is the target structure of peft and the original llama model.
+The trained LoRa peft model consists of adapter_config.json, adapter_model.bin, and trainer_state.json. Below is the file structure of peft and the original llama model.
 
 ```bash
 model

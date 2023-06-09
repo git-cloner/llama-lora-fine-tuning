@@ -229,7 +229,7 @@ deepspeed fastchat/train/train_lora.py \
 
 ### 4.1 模型位置
 
-训练好的lora peft模型由adapter_config.json、adapter_model.bin和trainer_state.json组成。下面是peft和原模型的目标结构。
+训练好的lora peft模型由adapter_config.json、adapter_model.bin和trainer_state.json组成。下面是peft和原模型的目录结构。
 
 ```bash
 model
