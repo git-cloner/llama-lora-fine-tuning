@@ -13,5 +13,5 @@ peft
 deepspeed
 bitsandbytes==0.37.2
 SentencePiece
-fschat
+fschat==0.2.10
 opencc
