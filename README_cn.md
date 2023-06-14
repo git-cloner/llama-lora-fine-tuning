@@ -58,11 +58,6 @@ sudo make install
 ##### 3.1.2.2 install libicu
 
 ```bash
-## centos (install by yum)
-sudo yum install libicu-devel 
-## ubuntu (install by apt)
-sudo apt-get install libicu-dev
-## centos/ubuntu (install from source)
 wget https://mirrors.aliyun.com/blfs/conglomeration/icu/icu4c-73_1-src.tgz
 tar xf icu4c-73_1-src.tgz
 cd icu/source
