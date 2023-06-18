@@ -37,7 +37,7 @@ Alpaca-lora的训练对内存要求不高，大概12G的2080Ti，就可以支持
 #### 3.1.1 下载源码
 
 ```bash
-https://github.com/git-cloner/llama-lora-fine-tuning
+git clone https://github.com/git-cloner/llama-lora-fine-tuning
 cd llama-lora-fine-tuning
 ```
 
