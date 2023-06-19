@@ -8,7 +8,7 @@ pycld2
 tqdm
 accelerate
 einops
-flash_attn
+flash_attn==1.0.5
 peft
 deepspeed
 bitsandbytes==0.37.2
