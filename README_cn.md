@@ -65,6 +65,7 @@ cd icu/source
 make
 make check
 sudo make install
+sudo ldconfig
 ```
 
 ##### 3.1.2.3 安装驱动及conda
