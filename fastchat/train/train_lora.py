@@ -27,7 +27,7 @@ from peft import (
     LoraConfig,
     get_peft_model,
     get_peft_model_state_dict,
-    prepare_model_for_int8_training,
+    prepare_model_for_kbit_training,
     set_peft_model_state_dict,
 )
 from transformers import LlamaForCausalLM, LlamaTokenizer
@@ -110,7 +110,7 @@ def train():
         device_map=device_map
     )
     print("装载模型完成")
-    model = prepare_model_for_int8_training(model)
+    model = prepare_model_for_kbit_training(model)
     print("模型处理为int8")
     lora_config = LoraConfig(
         r=lora_args.lora_r,
